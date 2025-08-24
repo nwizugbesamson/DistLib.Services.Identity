@@ -11,4 +11,8 @@
       <ProjectReference Include="..\PFinance.Services.Identity.Domain\PFinance.Services.Identity.Domain.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="RoleManagement\Commands\" />
+    </ItemGroup>
+
 </Project>
