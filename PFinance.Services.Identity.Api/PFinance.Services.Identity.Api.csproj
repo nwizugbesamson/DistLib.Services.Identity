@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net9.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <RootNamespace>PFinance.Services.Identity.Api</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="DistLib.Core" Version="1.0.1" />
+        <PackageReference Include="DistLib.WebApi" Version="1.0.1" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
+        <PackageReference Include="DistLib.Requests.MediaR" Version="1.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\PFinance.Services.Identity.Application\PFinance.Services.Identity.Application.csproj" />
+      <ProjectReference Include="..\PFinance.Services.Identity.Common\PFinance.Services.Identity.Common.csproj" />
+      <ProjectReference Include="..\PFinance.Services.Identity.Infrastructure\PFinance.Services.Identity.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
