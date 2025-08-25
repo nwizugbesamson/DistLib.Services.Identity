@@ -12,8 +12,9 @@ public class User : Aggregate<AggregateId>
     public UserRole Role { get; private set; }
     public DateTime CreatedAt { get; private set; }
 
-    private User(Email email, string passwordHash, UserRole role, DateTime createdAt)
+    private User(AggregateId id, Email email, string passwordHash, UserRole role, DateTime createdAt)
     {
+        Id = id;
         Email = email;
         PasswordHash = passwordHash;
         Role = role;
@@ -22,7 +23,7 @@ public class User : Aggregate<AggregateId>
 
     internal static User Create(Email email, string passwordHash, UserRole role, DateTime dateTime)
     {
-        User user = new User(email, passwordHash, role, dateTime)
+        User user = new User(AggregateId.New(), email, passwordHash, role, dateTime)
         {
             IsActive = true
         };
