@@ -17,7 +17,7 @@ public class RefreshToken : Aggregate<AggregateId>
     private RefreshToken(AggregateId id, Guid user, string token, DateTime createdAt, DateTime expiresAt) =>
         (Id, User, Token, CreatedAt, ExpiresAt) = (id, user, token, createdAt, expiresAt);
     
-    public static Result<RefreshToken> Create(Guid user, string token, DateTime dateTime, int durationInSeconds)
+    public static Result<RefreshToken> Create(Guid user, string token, DateTime dateTime, long durationInSeconds)
     {
         if (string.IsNullOrWhiteSpace(token))
             return Result.Failure<RefreshToken>(new Error("INVALID_TOKEN", ""));
