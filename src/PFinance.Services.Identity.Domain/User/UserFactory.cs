@@ -13,6 +13,11 @@ public class UserFactory : IUserFactory
         {
             return Result.Failure<User>(verifiedEmail.Error);
         }
+        
+        if (string.IsNullOrWhiteSpace(passwordHash))
+        {
+            return Result.Failure<User>(new Error("INVALID_PASSWORD", "Password is required"));
+        }
         return User.Create(verifiedEmail.Value, passwordHash, role, dateTime);
     }
 }
