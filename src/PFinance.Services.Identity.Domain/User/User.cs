@@ -37,11 +37,15 @@ public class User : Aggregate<AggregateId>
     {
         if (!IsActive)
         {
-            return Result.Failure(new Error("Inactive_Account", "Sign in failed"));
+            return Result.Failure(new Error("INACTIVE_ACCOUNT", "Sign in failed"));
         }
 
         AddEvent(UserEvents.UserSignedIn(Id.Value, Email.Value, Role));
         return Result.Success();
     }
 
+    public Result Deactivate()
+    {
+        throw new NotImplementedException();
+    }
 }
