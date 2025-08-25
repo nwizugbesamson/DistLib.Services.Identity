@@ -12,6 +12,8 @@
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.0"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="NSubstitute" Version="5.3.0" />
+        <PackageReference Include="Shouldly" Version="4.3.0" />
         <PackageReference Include="xunit" Version="2.5.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
     </ItemGroup>
@@ -21,8 +23,16 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\" />
-      <Folder Include="Domain\" />
+      <Folder Include="Application\RoleManagement\" />
+      <Folder Include="Application\UserAccount\" />
+      <Folder Include="Domain\RefreshToken\" />
+      <Folder Include="Domain\Role\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\src\PFinance.Services.Identity.Application\PFinance.Services.Identity.Application.csproj" />
+      <ProjectReference Include="..\..\src\PFinance.Services.Identity.Common\PFinance.Services.Identity.Common.csproj" />
+      <ProjectReference Include="..\..\src\PFinance.Services.Identity.Domain\PFinance.Services.Identity.Domain.csproj" />
     </ItemGroup>
 
 </Project>
