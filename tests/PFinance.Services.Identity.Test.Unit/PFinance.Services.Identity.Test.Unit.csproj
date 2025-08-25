@@ -23,8 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Application\RoleManagement\" />
-      <Folder Include="Application\UserAccount\" />
+      <Folder Include="Application\Test_RoleManagement\" />
     </ItemGroup>
 
     <ItemGroup>

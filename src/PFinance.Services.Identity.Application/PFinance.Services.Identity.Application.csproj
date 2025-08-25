@@ -15,4 +15,10 @@
       <Folder Include="RoleManagement\Commands\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="DistLib.Core">
+        <HintPath>..\..\..\..\.nuget\packages\distlib.core\1.0.1\lib\net8.0\DistLib.Core.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>
