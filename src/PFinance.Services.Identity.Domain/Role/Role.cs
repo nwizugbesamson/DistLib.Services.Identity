@@ -33,9 +33,12 @@ public class Role : Aggregate<AggregateId>
             return Result.Failure(permissionResult.Error);
         }
 
-        return _permissions.Contains(permissionResult.Value) 
-            ? Result.Failure(new Error("DUPLICATE_PERMISSION", "This permission already exists.")) 
-            : Result.Success();
+        if (_permissions.Contains(permissionResult.Value))
+        {
+            return Result.Failure(new Error("DUPLICATE_PERMISSION", "This permission already exists."));
+        }
+        _permissions.Add(permissionResult.Value);
+        return Result.Success();
     }
     
     public Result RemovePermission(string action, string resource)
@@ -58,26 +61,45 @@ public class Role : Aggregate<AggregateId>
     
     public Result AddPermissions(IEnumerable<(string action, string resource)> permissions)
     {
+        var toAdd = new List<Permission>();
+
         foreach (var (action, resource) in permissions)
         {
-            var result = AddPermission(action, resource);
+            var result = Permission.Create(action, resource);
             if (result.IsFailure)
-                return result; // fail fast
+                return result;
+
+            toAdd.Add(result.Value);
         }
+
+        foreach (var permission in toAdd)
+            _permissions.Add(permission);
+
         return Result.Success();
     }
+
 
     public Result RemovePermissions(IEnumerable<(string action, string resource)> permissions)
     {
+        var toRemove = new List<Permission>();
+
         foreach (var (action, resource) in permissions)
         {
-            var result = RemovePermission(action, resource);
+            var result = Permission.Create(action, resource);
             if (result.IsFailure)
-                return result; // fail fast
+                return result;
+
+            // Ensure permission actually exists before mutating
+            if (!_permissions.Contains(result.Value))
+                return Result.Failure(new Error("PERMISSION_NOT_FOUND", "One or more permission does not exist."));
+
+            toRemove.Add(result.Value);
         }
+
+        foreach (var permission in toRemove)
+            _permissions.Remove(permission);
+
         return Result.Success();
     }
-
-
     
 }

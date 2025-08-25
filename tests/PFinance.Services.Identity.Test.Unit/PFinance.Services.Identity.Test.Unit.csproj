@@ -25,8 +25,7 @@
     <ItemGroup>
       <Folder Include="Application\RoleManagement\" />
       <Folder Include="Application\UserAccount\" />
-      <Folder Include="Domain\RefreshToken\" />
-      <Folder Include="Domain\Role\" />
+      <Folder Include="Domain\Test_RefreshToken\" />
     </ItemGroup>
 
     <ItemGroup>
