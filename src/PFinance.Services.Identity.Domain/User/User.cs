@@ -46,6 +46,13 @@ public class User : Aggregate<AggregateId>
 
     public Result Deactivate()
     {
-        throw new NotImplementedException();
+        if (!IsActive)
+        {
+            return Result.Failure(new Error("ACCOUNT_ALREADY_DEACTIVATED", "User account is already deactivated"));
+        }
+
+        IsActive = false;
+        AddEvent(UserEvents.UserDeactivated(Id.Value, Email.Value, Role));
+        return Result.Success();
     }
 }

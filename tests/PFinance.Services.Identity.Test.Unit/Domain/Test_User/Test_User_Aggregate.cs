@@ -67,7 +67,7 @@ public class Test_User_Aggregate
         createdUser.Events.Any(e => e is UserDomain.UserCreated).ShouldBeTrue();
     }
     
-    // test user can be deactivated successfully when not active
+    // test user can be deactivated successfully when active
     [Theory]
     [InlineData("test.user@pfinance.com", "pass123", UserRole.Admin)]
     [InlineData("test.user2@pfinance.com", "pass123", UserRole.Customer)]
@@ -83,7 +83,7 @@ public class Test_User_Aggregate
         Result result = createdUser.Deactivate();
         
         // Assert
-        createdUser.IsActive.ShouldBe(true);
+        createdUser.IsActive.ShouldBe(false);
         result.IsSuccess.ShouldBeTrue();
         createdUser.Events.Count.ShouldBe(2);
         createdUser.Events.Any(e => e is UserDomain.UserDeactivated).ShouldBeTrue();
@@ -106,7 +106,7 @@ public class Test_User_Aggregate
         
         // Assert
         createdUser.IsActive.ShouldBe(false);
-        createdUser.Events.Count.ShouldBe(1);
+        createdUser.Events.Count.ShouldBe(2);
         result.IsSuccess.ShouldBeFalse();
         result.Error.Code.ShouldBe("ACCOUNT_ALREADY_DEACTIVATED");
         
